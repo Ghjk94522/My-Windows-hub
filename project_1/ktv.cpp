@@ -5,30 +5,23 @@
 #include<string>
 using namespace std;
 
-string account = "NJU_123", password = "NJUYZB";
-
 
 void admin_interface() {
-L2:	print_admin();
 	//需要先进行密码验证,待填充
-	int time = 1;
-	if (time <= 3)
-	{
-
-	}
-	else {
-		cout << "请检查您的用户名与密码是否匹配，不要暴力破解密码~\n";
+	int temp = check_password();
+	system("cls");
+	if (0 == temp)
 		return;
-	}
 
+L2:	print_admin();
 	int flag = -1;
 	while (flag < 0 || flag >= 4) {
 	    cin >> flag;
 
 		switch (flag) {
-		case 1: system("cls"); //admin_music_list();//查看曲库
+		case 1: system("cls"); admin_music_list();//查看曲库
 			break;
-		case 2: system("cls"); //music_rank();//歌曲排行
+		case 2: system("cls"); music_rank();//歌曲排行
 			break;
 		case 3: system("cls"); //admin_account();//账户管理
 			break;
