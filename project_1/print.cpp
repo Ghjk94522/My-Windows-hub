@@ -138,10 +138,12 @@ void print_admin_music_list()
 	set_position(30, 10);
 	cout << "请按提示输入命令序号：\n";
 	set_position(30, 13);
-	cout << "***   1.单次修改          ***";
+	cout << "***   1.单次添加          ***";
 	set_position(30, 14);
 	cout << "***   2.批量添加          ***";
 	set_position(30, 15);
+	cout << "***   3.单次删除          ***";
+	set_position(30, 16);
 	cout << "***   0.返回主界面        ***";
 	set_position(30, 19);
 	cout << "\n\t\t[   ]\b\b\b";
