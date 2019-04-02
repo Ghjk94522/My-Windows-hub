@@ -6,12 +6,17 @@
 using namespace std;
 
 
+string account = "NJU_126", password = "NJUYZB";
+
 void admin_interface() {
 	//需要先进行密码验证,待填充
 	int temp = check_password();
 	system("cls");
-	if (0 == temp)
+	if (0 == temp) {
+		set_position(30, 5);
+		cout << "您的机会耗尽了，已经退出系统，请30秒后重试。\n\n\n";
 		return;
+	}
 
 L2:	print_admin();
 	int flag = -1;
@@ -23,8 +28,15 @@ L2:	print_admin();
 			break;
 		case 2: system("cls"); music_rank();//歌曲排行
 			break;
-		case 3: system("cls"); //admin_account();//账户管理
-			break;
+		case 3: {
+			system("cls");
+			password = admin_account(password);//账户管理
+			system("cls");cout << "成功！";
+			for (unsigned int i = 0; i < 999999999; i++);
+			for (unsigned int i = 0; i < 999999999; i++);
+			system("cls");
+			main_interface();
+			break; }
 		case 0:  system("cls"); main_interface();//返回主界面
 			break;
 		default:

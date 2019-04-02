@@ -4,6 +4,8 @@
 #include<conio.h>
 using namespace std;
 
+extern string account, password;
+
 void set_position(int x, int y) {
 	HANDLE win_handle;
 	COORD pos = { x, y };
@@ -93,7 +95,6 @@ int check_password()
 	int time = 1;//用于计数
 L11:	if (time > 3)
 			return 0;
-	string account = "NJU_126", password = "NJUYZB";
 	string in_account, in_password;
 	cout << "\n请输入您的用户名： ";
 	cin >> in_account;
