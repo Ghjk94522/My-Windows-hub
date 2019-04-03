@@ -166,3 +166,29 @@ void print_admin_non_order()
 
 
 }
+
+void print_user_choose_music()
+{
+	set_position(30, 3);
+	cout << "===================================================";
+	set_position(30, 4);
+	cout << "=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=";
+	set_position(30, 5);
+	cout << "======== Welcome To Interface For Users ==========";
+	set_position(30, 6);
+	cout << "=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=";
+	set_position(30, 7);
+	cout << "===================================================";
+	set_position(30, 10);
+	cout << "请按提示输入命令序号：\n";
+	set_position(30, 13);
+	cout << "***   1.查看曲库          ***";
+	set_position(30, 14);
+	cout << "***   2.根据歌手搜歌      ***";
+	set_position(30, 15);
+	cout << "***   3.根据歌名搜歌      ***";
+	set_position(30, 16);
+	cout << "***   0.返回主界面        ***";
+	set_position(30, 19);
+	cout << "\n\t\t[   ]\b\b\b";
+}

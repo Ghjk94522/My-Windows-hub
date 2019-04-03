@@ -33,7 +33,6 @@ L2:	print_admin();
 			password = admin_account(password);//账户管理
 			system("cls");cout << "成功！";
 			for (unsigned int i = 0; i < 999999999; i++);
-			for (unsigned int i = 0; i < 999999999; i++);
 			system("cls");
 			main_interface();
 			break; }
@@ -53,7 +52,7 @@ L3:	print_user();
 	    cin >> flag;
 
 		switch (flag) {
-		case 1: system("cls"); //music_choose();//进入搜索页面并点歌
+		case 1: system("cls"); music_choose();//进入搜索页面并点歌
 			break;
 		case 2: system("cls"); //music_check();//查看已点歌曲
 			break;

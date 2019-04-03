@@ -78,11 +78,6 @@ L1:		set_position(30, 10);
 		system("cls");
 		cout << "请检查密码是否正确！";
 		for (unsigned int i = 0; i < 999999999; i++);
-		for (unsigned int i = 0; i < 999999999; i++);
-		for (unsigned int i = 0; i < 999999999; i++);
-		for (unsigned int i = 0; i < 999999999; i++);
-		for (unsigned int i = 0; i < 999999999; i++);
-		for (unsigned int i = 0; i < 999999999; i++);
 		system("cls");
 		goto L0;
 	}
