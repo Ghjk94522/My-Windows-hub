@@ -89,7 +89,7 @@ void ModifyLineData(const char *_filename, int linenum, char *linedata) {
 	char putout[1024] = { 0 };
 	char abc[1024] = "01 É³Ä®ÂæÍÕ ÎŞÃûÊÏ smlt wms 90 85";
 
-	ModifyLineData("output.txt", 1, abc);
+	ModifyLineData("output.txt", 2, abc);
 
 	ReadLineData("output.txt", 1, putout);
 	cout << putout << endl;

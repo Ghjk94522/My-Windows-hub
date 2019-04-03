@@ -145,6 +145,8 @@ void print_admin_music_list()
 	set_position(30, 15);
 	cout << "***   3.单次删除          ***";
 	set_position(30, 16);
+	cout << "***   4.展示曲库          ***";
+	set_position(30, 17);
 	cout << "***   0.返回主界面        ***";
 	set_position(30, 19);
 	cout << "\n\t\t[   ]\b\b\b";

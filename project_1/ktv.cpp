@@ -90,8 +90,8 @@ L1:	print_main();
 	}
 }
 
-int main()
+/*int main()
 {
 	main_interface();
 	return 0;
-}
+}*/

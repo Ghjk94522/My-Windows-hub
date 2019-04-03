@@ -13,6 +13,9 @@ void print_admin_music_list();//曲库修改命令提示
 void add_music_once();//单次添加
 void remove_music_once();//单次删除
 void add_music_list();//列表式添加
+void show_list_music();//展示曲库
+void read_list_from_file();//从文件中读取信息到链表
+
 
 //选歌系统
 void print_user_choose_music();

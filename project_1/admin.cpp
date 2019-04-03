@@ -10,15 +10,17 @@ void admin_music_list()
 L1:	print_admin_music_list();
 
 	int flag = -1;
-	while (flag < 0 || flag >= 4) {
+	while (flag < 0 || flag >= 5) {
 		cin >> flag;
 
 		switch (flag) {
-		case 1: system("cls");// add_music_once();//单次添加
+		case 1: system("cls"); add_music_once();//单次添加
 			break;
-		case 2: system("cls");// add_music_list();//列表添加
+		case 2: system("cls"); add_music_list();//列表添加
 			break;
 		case 3: system("cls");// remove_music_once();//单次删除
+			break;
+		case 4:system("cls"); show_list_music();//展示曲库
 			break;
 		case 0:  system("cls"); main_interface();//返回主界面
 			break;
