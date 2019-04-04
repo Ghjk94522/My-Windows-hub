@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<string>
 #include"declare_2.h"
@@ -20,6 +21,7 @@ Song *head = NULL;
 
 void add_music_once()
 {
+	//read_list_from_file();
 	Song *p;
 	if (head == NULL)
 	{
@@ -44,6 +46,10 @@ void add_music_once()
 	cin >> p->short_for_singer;
 	p->rank_user = "0";
 	cin >> p->rank_admin;
+
+	write_list_to_file();
+
+	show_list_music();
 }
 
 void add_music_list()
@@ -53,6 +59,7 @@ void add_music_list()
 
 void show_list_music()
 {
+	//read_list_from_file();
 	cout << "以下展示曲库全部歌曲： 依次为序号/曲名/歌手/用户评分/后台评分\n0表示未评分\n";
 	if (head == NULL)
 	{
@@ -76,13 +83,16 @@ L5:	int i = -1;
 	}
 }
 
+
+//something wrong
 void read_list_from_file()
 {
 	freopen("output.txt", "r", stdin);
 	
 	Song *p = head;
 	string temp_l; int flag = 1;
-	while (cin >> temp_l)
+	cin >> temp_l;
+	while (temp_l != "")
 	{
 		switch (flag) {
 		case 1:p->id = temp_l; flag++; break;
@@ -99,5 +109,26 @@ void read_list_from_file()
 			}
 			break;
 		}
+		cin >> temp_l;
 	}
+	fclose(stdin);
+}
+
+//right
+void write_list_to_file()
+{
+	freopen("output.txt", "w", stdout);
+
+	Song *p = head;
+	if (p == NULL)
+		cout << " ";
+	else
+		for (; p != NULL; p = p->next)
+		{
+			cout << p->id << " " << p->name_of_song << " " << p->name_of_singer << " " 
+				<< p->short_for_song << " "<< p->short_for_singer << " " 
+				<< p->rank_user << " " << p->rank_admin << endl;
+		}
+
+	fclose(stdout);
 }
