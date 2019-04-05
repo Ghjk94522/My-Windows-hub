@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<string>
+#include<vector>
 #include"declare_2.h"
 #include"declare_1.h"
 using namespace std;
@@ -21,7 +22,7 @@ Song *head = NULL;
 
 void add_music_once()
 {
-	//read_list_from_file();
+	read_list_from_file();
 	Song *p;
 	if (head == NULL)
 	{
@@ -115,7 +116,7 @@ void read_list_from_file()
 
 		switch (flag) {
 		case 1: {p->id = temp_l; flag++; break; }
-		case 2: {cout << temp_l; p->name_of_song = temp_l; flag++; break; }
+		case 2: {p->name_of_song = temp_l; flag++; break; }
 		case 3: {p->name_of_singer = temp_l; flag++; break; }
 		case 4: {p->short_for_song = temp_l; flag++; break; }
 		case 5: {p->short_for_singer = temp_l; flag++; break; }
@@ -186,8 +187,68 @@ L6:	set_position(30, 3);
 			admin_music_list();
 		}
 	}
-	cout << "Failed, the song doesn't exit.Please try again.";
+	cout << "Failed, the song doesn't exist. Please try again.";
 	for (unsigned int i = 0; i < 999999999; i++);
 	system("cls");
 	goto L6;
+}
+
+//这里的问题是rank存的是string类型，怎么比较=。=
+void sort_aud()
+{
+	vector<string> a(10);
+	Song *p = head;
+	if (p == NULL)
+	{
+		cout << "Error, the list is empty! ";
+		for (unsigned int i = 0; i < 999999999; i++);
+		system("cls");
+		main_interface();
+	}
+
+	for (; p != NULL; p = p->next) {
+
+	}
+}
+
+void sort_adm()
+{
+
+}
+
+void show_list_music_u()
+{
+	read_list_from_file();
+	cout << "以下展示曲库全部歌曲： 依次为序号/曲名/歌手/用户评分\n0表示未评分\n";
+	if (head == NULL)
+	{
+		cout << "Error!The list is empty!";
+		for (unsigned int i = 0; i < 999999999; i++);
+		system("cls");
+		admin_music_list();
+	}
+	for (Song *p = head; p != NULL; p = p->next)
+		cout << p->id << " " << p->name_of_song << " " << p->name_of_singer << " " << p->rank_user << "\n";
+	cout << endl;
+	little_assit();
+}
+
+void singer_choose() {
+	cout << "请输入歌手缩写，注意可能出现多首歌曲，最后根据序号选择： \n提示：数字为顾客评分\n";
+	string in_singer;
+	cin >> in_singer;
+	int flag = -1;
+	for (Song *p = head; p != NULL; p = p->next)
+		if (p->short_for_singer == in_singer)
+		{
+			cout << "\n" << p->id << " " << p->name_of_song << " " << p->name_of_singer << " " << p->rank_user << endl;
+			flag = 1;
+		}
+	if (flag == -1)
+	{
+		cout << "没有查找到该歌手，请联系管理员添加歌曲~\n";
+		music_choose();
+	}
+	cout << "请输入所选歌曲序号：\n";
+	int choice; cin >> choice;
 }

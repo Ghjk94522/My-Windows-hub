@@ -12,9 +12,9 @@ L1:	print_user_choose_music();
 		cin >> flag;
 
 		switch (flag) {
-		case 1: system("cls"); //view_list();//查看曲库
+		case 1: system("cls"); show_list_music_u();//查看曲库
 			break;
-		case 2: system("cls"); //singer_choose();//根据歌手搜歌
+		case 2: system("cls"); singer_choose();//根据歌手搜歌
 			break;
 		case 3: system("cls"); //song_choose();//根据歌名搜歌
 			break;

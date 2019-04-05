@@ -22,8 +22,12 @@ void write_list_to_file();//输入到文件
 void little_assit();//辅助函数试试能不能解决缓冲区问题
 string CharToString(char *contentchar);
 
-
+//评分系统
+void sort_aud();
+void sort_adm();//给链表排序
 
 
 //选歌系统
 void print_user_choose_music();
+void show_list_music_u();//用户查看曲库
+void singer_choose();//根据歌手选歌

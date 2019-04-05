@@ -16,7 +16,7 @@ L1:	print_admin_music_list();
 		switch (flag) {
 		case 1: system("cls"); add_music_once();//单次添加
 			break;
-		case 2: system("cls"); add_music_list();//列表添加
+		case 2: system("cls"); //add_music_list();//列表添加
 			break;
 		case 3: system("cls"); remove_music_once();//单次删除
 			break;
@@ -33,6 +33,8 @@ L1:	print_admin_music_list();
 void music_rank()
 {
 	print_admin_non_order();
+	cout << "排行仅展示前十位： \n";
+	cout << "顾客打分排行: \n";
 
 
 }
@@ -84,3 +86,4 @@ L1:		set_position(30, 10);
 		goto L0;
 	}
 }
+
