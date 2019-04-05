@@ -18,7 +18,7 @@ L1:	print_admin_music_list();
 			break;
 		case 2: system("cls"); add_music_list();//列表添加
 			break;
-		case 3: system("cls");// remove_music_once();//单次删除
+		case 3: system("cls"); remove_music_once();//单次删除
 			break;
 		case 4:system("cls"); show_list_music();//展示曲库
 			break;
