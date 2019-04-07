@@ -9,7 +9,6 @@ using namespace std;
 string account = "NJU_126", password = "NJUYZB";
 
 void admin_interface() {
-	//需要先进行密码验证,待填充
 	int temp = check_password();
 	system("cls");
 	if (0 == temp) {

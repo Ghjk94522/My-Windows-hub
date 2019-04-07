@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include"declare_2.h"
 using namespace std;
 
 //读取指定行数据

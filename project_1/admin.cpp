@@ -35,8 +35,22 @@ void music_rank()
 	print_admin_non_order();
 	cout << "排行仅展示前十位： \n";
 	cout << "顾客打分排行: \n";
-
-
+	sort_aud();
+	cout << "\n\n" << "后台评分前十： \n";
+	sort_adm();
+	
+	cout << "输入0返回上一级界面：\n";
+L5:	int i = -1;
+	cin >> i;
+	if (0 == i) {
+		system("cls");
+		admin_interface();
+	}
+	else
+	{
+		cout << "Error!Input again:\n";
+		goto L5;
+	}
 }
 
 string admin_account(string a)

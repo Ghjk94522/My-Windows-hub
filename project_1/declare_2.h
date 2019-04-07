@@ -31,3 +31,4 @@ void sort_adm();//给链表排序
 void print_user_choose_music();
 void show_list_music_u();//用户查看曲库
 void singer_choose();//根据歌手选歌
+int CharToInt(char b[]);//类型转换
