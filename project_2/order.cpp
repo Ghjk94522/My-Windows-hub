@@ -7,8 +7,12 @@ void check_order(){
     string order_head;
     cin >> order_head;
 
-    if(order_head == "CREAT")
+    if(order == "login:")
+    	login();
+    else if(order_head == "CREAT")
         creat_point();
+    else if(order_head == "DROP")
+    	drop_point();
 }
 
 void print_sql(){
