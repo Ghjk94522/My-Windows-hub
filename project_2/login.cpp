@@ -1,5 +1,7 @@
 #include<iostream>
 #include<string>
+#include"head1.h"
+using namespace std;
 
 vector<string> localA, localP;
 
@@ -13,12 +15,12 @@ void login(){
 	string temp; int i = 1;
 	while(cin >> temp){
 		if(1 == i){
-			localA.insert(localA.end(), temp);
+			localA.push_back(temp);
 			temp.clear();
 			i = 0;
 		}
 		else{
-			localP.insert(localP.end(), temp);
+			localP.push_back(temp);
 			temp.clear();
 			i = 1;
 		}
@@ -32,7 +34,7 @@ void login(){
 			i++;
 	}
 
-	cout << "password:";
+L0:	cout << "password:";
 	char pw[50], ch;
 	int j = 0;
 	while((ch = getch()) != '\r'){
@@ -48,7 +50,14 @@ void login(){
 
 	password = pw;
 
-	if(password == localP[i])
-		
-
+	if(password == localP[i]){
+		print_sql();
+		check_order();
+	}
+	else{
+		cout << "The password is wrong, please check and input again./n";
+		password.clear();
+		print_sql();
+		goto L0;
+	}
 }

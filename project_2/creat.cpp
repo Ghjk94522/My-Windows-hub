@@ -22,7 +22,7 @@ void creat_point(){
     scanf("%c", &temp);
     
     if(temp == ','){
-        column.insert(column.end(),temp_column);
+        column.push_back(temp_column);
         temp_column.clear();
     }
     
@@ -48,7 +48,7 @@ void creat_point(){
     fclose(fp);
     }
 
-    else if(temp == 'F'){
+    /*else if(temp == 'F'){
          scanf("%c", &temp); scanf("%c", &temp); scanf("%c", &temp); scanf("%c", &temp);
 L1:      string address; cin >> address;
          address = "/home/young/progExper/DataHub/" + address;
@@ -65,6 +65,7 @@ L1:      string address; cin >> address;
             getline(q, 65536, '#');
             
          }
-    }
+    }*/
+
 
 }
