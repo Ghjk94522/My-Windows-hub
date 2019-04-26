@@ -1,5 +1,8 @@
 #include<iostream>
 #include<string>
+#include"head1.h"
+using namespace std;
+
 
 vector<string> localA, localP;
 
@@ -33,7 +36,7 @@ void login(){
 	}
 
 	cout << "password:";
-	char pw[50], ch;
+L0:	char pw[50], ch;
 	int j = 0;
 	while((ch = getch()) != '\r'){
 		if(ch == '\b' && i > 0){
@@ -48,7 +51,18 @@ void login(){
 
 	password = pw;
 
-	if(password == localP[i])
+	if(password == localP[i]){
+		print_sql();
+		check_order();
+	}
+	else{
+		cout << "Pass word is wrong, please check and input again.";
+		for(int i = 1; i < 9999999; i++);
+		system("cls");
+		cout << "password:";
+		password.clear();
+		goto L0;
+	}
 		
 
 }
