@@ -1,17 +1,18 @@
 #include<iostream>
 #include<string>
+#include<vector>
 #include"head1.h"
 using namespace std;
 
 vector<string> localA, localP;
+string account, password;
 
 void login(){
-	string account, password;
 	cin >> account;
 
 	string localPass;
 
-	FILE *fp = fopen("/home/young/progExper/DataHub/AP.txt", "r");
+	FILE *fp = freopen("/home/young/progExper/DataHub/AP.txt", "r", stdin);
 	string temp; int i = 1;
 	while(cin >> temp){
 		if(1 == i){
@@ -34,10 +35,13 @@ void login(){
 			i++;
 	}
 
+	fclose(stdin);
+
 L0:	cout << "password:";
 	char pw[50], ch;
 	int j = 0;
-	while((ch = getch()) != '\r'){
+	system("stty -echo");
+	while((ch = getchar()) != '\r'){
 		if(ch == '\b' && i > 0){
 			cout << "\b \b"; --i; pw[j] = '\0';
 		}
@@ -48,6 +52,7 @@ L0:	cout << "password:";
 	}
 	pw[j] = '\0';
 
+	system("stty echo");
 	password = pw;
 
 	if(password == localP[i]){

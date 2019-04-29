@@ -1,7 +1,6 @@
 #include<iostream>
 #include<stdio.h>
 #include"head1.h"
-#include<vector>
 using namespace std;
 
 extern string account;
@@ -13,6 +12,13 @@ vector<string> column;
 其中t_name表示表名，acc_address表示地址
 顺序也是表名 \t 地址
 每次使用creat新的表的时候都要先记录表名和地址的一一对应
+
+这里的文件记录结构为：
+每个表格对应一个txt文件，地址为address
+
+对应一个权限文件，地址为address_root
+
+每个用户对应着一个表格记录文件，地址为acc_address
 */
 
 void creat_point(){
@@ -40,7 +46,8 @@ void creat_point(){
     cin >> rubbish;
     string address; cin >> address; 
     address = substr(0, address.length() - 4);
-    string address_root; address_root = "/home/young/progExper/RootHub/" + address + "Root.txt";
+    string address_root; 
+    address_root = "/home/young/progExper/RootHub/" + address + "Root.txt";
     address = "/home/young/progExper/DataHub/" + address + ".txt";
 
     const char *p0 = address.data();
@@ -59,24 +66,27 @@ void creat_point(){
     fclose(fp);
     
     string acc_address;
-    acc_address = account + "SQL.txt";
+    acc_address = "/home/young/progExper/RootHub/" + account + "SQL.txt";
     const char *p1 = acc_address.data();
-    FILE *fp = fopen(p1, "a");
+    fp = fopen(p1, "a");
 
     fprintf(fp, "\n");
     fprintf(fp, t_name->c_str());
     fprintf(fp, "\t");
     fprintf(fp, address->c_str());
+    fprintf(fp, "\t");
+    fprintf(fp, address_root->c_str());
 
     fclose(fp);
 
     const char *q = address_root.data();
-    FILE *fp = fopen(q, "a");
+    fp = fopen(q, "a");
     fprintf(fp, "owner\t1\t1\t1\t1\t");//这里四个权限数字分别对应DROP/INSERT/DELETE/SELETE，用1表示拥有，0表示不拥有
     fclose(fp);
 
-    
-
+    cout << "Successful!\n";
+    print_sql();
+    check_order();
     }
 
     /*else if(temp == 'F'){
