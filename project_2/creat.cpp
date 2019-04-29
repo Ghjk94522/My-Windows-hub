@@ -29,7 +29,7 @@ void creat_point(){
     }
     
     cin >> rubbish;
-    string address; cin >> address;
+    string address; cin >> address; //address -= ".txt";
     address = "/home/young/progExper/DataHub/" + address;
 
     const char *p = address.data();
