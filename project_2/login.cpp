@@ -4,6 +4,12 @@
 #include"head1.h"
 using namespace std;
 
+/*
+这里记录一下每个账户文件的格式：
+所有账户的账户名和密码统一记录在AP.txt中
+格式为账户名\n密码\n账户名\n密码
+*/
+
 vector<string> localA, localP;
 string account, password;
 
@@ -12,7 +18,7 @@ void login(){
 
 	string localPass;
 
-	FILE *fp = freopen("/home/young/progExper/DataHub/AP.txt", "r", stdin);
+	freopen("/home/ubuntu/yyy/project_2/DataHub/AP.txt", "r", stdin);
 	string temp; int i = 1;
 	while(cin >> temp){
 		if(1 == i){

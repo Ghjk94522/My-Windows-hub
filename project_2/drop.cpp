@@ -4,7 +4,7 @@ using namespace std;
 
 /*
 权限文件地址：
-"/home/young/progExper/RootHub/" + address + "Root.txt"
+"/home/ubuntu/yyy/project_2/RootHub/" + address + "Root.txt"
 内容格式：
 owner\t1\t1\t1\t1\t
 (只有第一行会出现owner，也就是文件创建者，其余都是四个01数字表示权限)
@@ -12,7 +12,7 @@ owner\t1\t1\t1\t1\t
 
 这里地址的读取要依赖于每个用户所对应的TABLE表
 表记录文件地址：
-"/home/young/progExper/RootHub/" + account + "SQL.txt"
+"/home/ubuntu/yyy/project_2/RootHub/" + account + "SQL.txt"
 内容格式：
 表格名\t表格文件地址\t权限文件地址
 */
@@ -27,7 +27,7 @@ void drop_point(){
 	cin >> Tname;
 
 	string acc_address;
-    acc_address = "/home/young/progExper/RootHub/" + account + "SQL.txt";
+    acc_address = "/home/ubuntu/yyy/project_2/RootHub/" + account + "SQL.txt";
     const char *p1 = acc_address.data();
 
     string Tname_local;

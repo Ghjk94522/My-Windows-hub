@@ -1,5 +1,7 @@
 #include<iostream>
 #include<stdio.h>
+#include<string>
+#include<vector>
 #include"head1.h"
 using namespace std;
 
@@ -45,10 +47,10 @@ void creat_point(){
     
     cin >> rubbish;
     string address; cin >> address; 
-    address = substr(0, address.length() - 4);
+    address = address.substr(0, address.length() - 4);
     string address_root; 
-    address_root = "/home/young/progExper/RootHub/" + address + "Root.txt";
-    address = "/home/young/progExper/DataHub/" + address + ".txt";
+    address_root = "/home/ubuntu/yyy/project_2/RootHub/" + address + "Root.txt";
+    address = "/home/ubuntu/yyy/project_2/DataHub/" + address + ".txt";
 
     const char *p0 = address.data();
 
@@ -66,16 +68,16 @@ void creat_point(){
     fclose(fp);
     
     string acc_address;
-    acc_address = "/home/young/progExper/RootHub/" + account + "SQL.txt";
+    acc_address = "/home/ubuntu/yyy/project_2/RootHub/" + account + "SQL.txt";
     const char *p1 = acc_address.data();
     fp = fopen(p1, "a");
 
     fprintf(fp, "\n");
-    fprintf(fp, t_name->c_str());
+    fprintf(fp, t_name.c_str());
     fprintf(fp, "\t");
-    fprintf(fp, address->c_str());
+    fprintf(fp, address.c_str());
     fprintf(fp, "\t");
-    fprintf(fp, address_root->c_str());
+    fprintf(fp, address_root.c_str());
 
     fclose(fp);
 
@@ -92,7 +94,7 @@ void creat_point(){
     /*else if(temp == 'F'){
          scanf("%c", &temp); scanf("%c", &temp); scanf("%c", &temp); scanf("%c", &temp);
 L1:      string address; cin >> address;
-         address = "/home/young/progExper/DataHub/" + address;
+         address = "/home/ubuntu/yyy/project_2/DataHub/" + address;
          const char *p = address.data();
 
          FILE *fp = fopen(p, "r");
