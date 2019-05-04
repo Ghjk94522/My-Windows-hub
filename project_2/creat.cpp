@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include<iostream>
 #include<stdio.h>
 #include<string>
@@ -49,8 +51,8 @@ void creat_point(){
     string address; cin >> address; 
     address = address.substr(0, address.length() - 4);
     string address_root; 
-    address_root = "/home/ubuntu/yyy/project_2/RootHub/" + address + "Root.txt";
-    address = "/home/ubuntu/yyy/project_2/DataHub/" + address + ".txt";
+    address_root = /*"/home/ubuntu/yyy/project_2/RootHub/" + address +*/ "Root.txt";
+    address = /*"/home/ubuntu/yyy/project_2/DataHub/" +*/ address + ".txt";
 
     const char *p0 = address.data();
 
@@ -68,7 +70,7 @@ void creat_point(){
     fclose(fp);
     
     string acc_address;
-    acc_address = "/home/ubuntu/yyy/project_2/RootHub/" + account + "SQL.txt";
+    acc_address = /*"/home/ubuntu/yyy/project_2/RootHub/" +*/ account + "SQL.txt";
     const char *p1 = acc_address.data();
     fp = fopen(p1, "a");
 

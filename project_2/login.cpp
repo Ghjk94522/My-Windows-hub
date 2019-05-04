@@ -1,4 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include<iostream>
+#include<conio.h>
 #include<string>
 #include<vector>
 #include"head1.h"
@@ -18,9 +21,12 @@ void login(){
 
 	string localPass;
 
-	freopen("/home/ubuntu/yyy/project_2/DataHub/AP.txt", "r", stdin);
+	FILE *fp = fopen("AP.txt", "r");
+	//freopen("/home/ubuntu/yyy/project_2/DataHub/AP.txt", "r", stdin);
 	string temp; int i = 1;
-	while(cin >> temp){
+
+	const char *ppp = temp.data();
+	while(fscanf(fp, "%s", ppp) != EOF){
 		if(1 == i){
 			localA.push_back(temp);
 			temp.clear();
@@ -41,13 +47,13 @@ void login(){
 			i++;
 	}
 
-	fclose(stdin);
+	fclose(fp);
 
 L0:	cout << "password:";
 	char pw[50], ch;
 	int j = 0;
-	system("stty -echo");
-	while((ch = getchar()) != '\r'){
+	//system("stty -echo");
+	while((ch = _getch()) != '\r'){
 		if(ch == '\b' && i > 0){
 			cout << "\b \b"; --i; pw[j] = '\0';
 		}
@@ -58,7 +64,7 @@ L0:	cout << "password:";
 	}
 	pw[j] = '\0';
 
-	system("stty echo");
+	//system("stty echo");
 	password = pw;
 
 	if(password == localP[i]){
