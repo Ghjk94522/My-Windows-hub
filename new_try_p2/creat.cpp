@@ -54,6 +54,7 @@ void creat_point(){
 
 		const char *p0 = acc_address.data();//写入用户拥有的表格记录文件
 
+		//格式为：表格名\t表格文件地址\t表格权限地址
 		FILE *fp0 = fopen(p0, "a");
 		fprintf(fp0, "\n%s", t_name.c_str());
 		fprintf(fp0, "\t%s", address.c_str());
@@ -62,7 +63,7 @@ void creat_point(){
 		fclose(fp0);
 
 
-
+		//输入表格聂内容，首行是表格名，之后是id+表头
 		const char *p1 = address.data();
 
 		FILE *fp1 = fopen(p1, "a");
@@ -73,9 +74,25 @@ void creat_point(){
 		fclose(fp1);
 
 
-		
+		//记录用户文件库，格式为：表格名，表格文件地址
+		const char *p2 = acc_address.data();
+		FILE *fp2 = fopen(p2, "a");
+		fprintf(fp2, "\n%s\t%s\towner", t_name.c_str(), address.c_str());
+		fclose(fp2);
+
+		//记录权限文件，格式为：用户名\t1\t1\t1\t1
+		const char *p3 = address_root.data();
+		FILE *fp3 = fopen(p3, "a");
+		fprintf(fp3, "\n%s\t1\t1\t1\t1", account.c_str());
+		fclose(fp3);
+
+		cout << "Successful!\n";
+		print_sql();
+		check_order();
 
 
 
 	}
+
+	
 }
