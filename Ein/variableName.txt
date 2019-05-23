@@ -1,0 +1,33 @@
+vector<int> posValue //the value of the position
+
+int chessMove //the chess waiting to be moved
+
+vector<int> chessBooard //record the chess on the chessBooard
+
+enum chessColor {b, r, w} //the color of the chess
+
+vector<string> ramString //record the log waiting to be write to the file
+
+
+//the variableName above are all global
+
+
+
+string reciveCB //the message received from sever
+
+chessColor toMove //the color of the chess to be moved
+
+int bound1, bound2 //the bound of the substitution
+
+int chess1, chess2 //the substitution
+
+int flag1, flag2 //the flag to show if the chess can be used
+
+string orderSend //the message to be sent to the sever
+
+int pos //the position of the chessMove
+
+int valuePos //the value of the chessMove
+
+
+//the variableName above are all in the function handle
