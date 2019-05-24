@@ -157,37 +157,22 @@ int setOppo(int n){
 		return 0;
 }
 
+//the function to set the color of a chess
+chessColor setColor(int s){
+	if(s > 0 && s < 7)
+		return red;
+	else if(s == 0)
+		return white;
+	else
+		return blue;
+}
+
+
 //return 1 means right/left, 2 means up/down, 3 means rightdown/leftup
 //the first check without the surrounding of the target
 int checkSafety(int s, chessColor c){
 	if(c == red){ //c is red
-		chessColor tempc6, tempc1, tempc5;
-		if(chessBoard[s+1] != 0){
-			if(chessBoard[s+1] > 0 && chessBoard[s+1] < 7)
-				tempc1 = red;
-			else
-				tempc1 = blue;
-		}
-		else
-			tempc1 = white;
-		
-		if(chessBoard[s+5] != 0){
-			if(chessBoard[s+5] > 0 && chessBoard[s+5] < 7)
-				tempc5 = red;
-			else
-				tempc5 = blue;
-		}
-		else
-			tempc5 = white;
-		
-		if(chessBoard[s+6] != 0){
-			if(chessBoard[s+6] > 0 && chessBoard[s+6] < 7)
-				tempc6 = red;
-			else
-				tempc6 = blue;
-		}
-		else
-			tempc6 = white;
+		chessColor tempc6 = setColor(chessBoard[s+6]), tempc1 = setColor(chessBoard[s+1]), tempc5 = setColor(chessBoard[s+5]);
 
 		if(tempc6 == blue)
 			return 3;
@@ -206,34 +191,8 @@ int checkSafety(int s, chessColor c){
 	
 	
 	else{ //c is blue
-		chessColor tempc6, tempc1, tempc5;
-		if(chessBoard[s-1] != 0){
-			if(chessBoard[s-1] > 0 && chessBoard[s-1] < 7)
-				tempc1 = red;
-			else
-				tempc1 = blue;
-		}
-		else
-			tempc1 = white;
+		chessColor tempc6 = setColor(chessBoard[s-6]), tempc1 = setColor(chessBoard[s-1]), tempc5 = setColor(chessBoard[s-5]);
 		
-		if(chessBoard[s-5] != 0){
-			if(chessBoard[s-5] > 0 && chessBoard[s-5] < 7)
-				tempc5 = red;
-			else
-				tempc5 = blue;
-		}
-		else
-			tempc5 = white;
-		
-		if(chessBoard[s-6] != 0){
-			if(chessBoard[s-6] > 0 && chessBoard[s-6] < 7)
-				tempc6 = red;
-			else
-				tempc6 = blue;
-		}
-		else
-			tempc6 = white;
-
 		if(tempc6 == red)
 			return 3;
 		else{ //tempc6 is blue or white
@@ -252,6 +211,8 @@ int checkSafety(int s, chessColor c){
 	
 	
 }
+
+
 
 
 //the main function to move a chess
@@ -273,12 +234,7 @@ int Einstein::handle(){
 
 	chessColor toMove;
 	//set the color of the chessMove
-	if(chessMove > 0 && chessMove < 7){
-		toMove = red;
-	}
-	else if(chessMove > 6 && chessMove <13){
-		toMove = blue;
-	}
+	toMove = setColor(chessMove);
 
 	//set the bound of chessmove
 	int bound1 = 0, bound2 = 0;
@@ -329,6 +285,7 @@ int Einstein::handle(){
 	}
 	int valuePos = posValue[pos]; //set the value of the chessMove
 
+	//set the orderSend
 	switch(valuePos){
 		case 1:{
 			switch(checkSafety(pos, red)){
@@ -362,10 +319,94 @@ int Einstein::handle(){
 			}
 		};break;
 		case 4:{
+			if(toMove == red) //to move is red
+				switch(checkSafety(pos, red)){
+						case 1: orderSend = to_string(chessMove) + "|right"; break;
+						case 2: orderSend = to_string(chessMove) + "|down"; break;
+						case 3: orderSend = to_string(chessMove) + "|rightdown"; break;
+						default: {
+							cout << "Something wrong with checkSafety.\n";
+							return 0;
+						}
+					}
+			
+			
+			else{ // tomove is blue
+				switch(pos){
+					case 2: orderSend = to_string(chessMove) + "|left"; break;
+					case 7: orderSend = to_string(chessMove) + "|leftup"; break;
+					case 11: {
+						if(setColor(chessboard[5] != blue))
+							orderSend = to_string(chessMove) + "|leftup";
+						else if(setColor(chessboard[6] == blue))
+							orderSend = to_string(chessMove) + "|leftup";
+						else
+							orderSend = to_string(chessMove) + "|up";
+					}; break;
+					case 10: orderSend = to_string(chessMove) + "|up"; break;
+					default :{
+						cout << "Something wrong with pos.\n";
+						return 0;
+					}
+				}
+			}
+		};break;
+		case 5:{
+			if(toMove == red)
+				switch(pos){
+					case 4: orderSend = to_string(chessMove) + "|down"; break;
+					case 9: orderSend = to_string(chessMove) + "|down"; break;
+					case 15: orderSend = to_string(chessMove) + "|right"; break;
+					case 20: orderSend = to_string(chessMove) + "|right"; break;
+					case 21: orderSend = to_string(chessMove) + "|right"; break;
+					case 16:
+					case 3:
+					case 8:{
+						switch(checkSafety(pos, red)){
+							case 1: orderSend = to_string(chessMove) + "|right"; break;
+							case 2: orderSend = to_string(chessMove) + "|down"; break;
+							case 3: orderSend = to_string(chessMove) + "|rightdown"; break;
+							default :{
+								cout << "Something wrong with checkSafety.\n";
+								return 0;
+							}
+						}
+					}; break;
+					default :{
+						cout << "Something wrong with pos.\n";
+						return 0;
+					}
+				}
+			else{ // tomove is blue
+				switch(pos){
+					case 4: orderSend = to_string(chessMove) + "|left"; break;
+					case 3: orderSend = to_string(chessMove) + "|left"; break;
+					case 15: orderSend = to_string(chessMove) + "|up"; break;
+					case 20: orderSend = to_string(chessMove) + "|up"; break;
+					case 21:
+					case 9: 
+					case 16:
+					case 8:{
+						switch(checkSafety(pos, red)){
+							case 1: orderSend = to_string(chessMove) + "|left"; break;
+							case 2: orderSend = to_string(chessMove) + "|up"; break;
+							case 3: orderSend = to_string(chessMove) + "|leftup"; break;
+							default :{
+								cout << "Something wrong with checkSafety.\n";
+								return 0;
+							}
+						}
+					}; break;
+					default :{
+						cout << "Something wrong with pos.\n";
+						return 0;
+					}
+				}
+			}
+		};break;
+		case 6:{
 			
 		};break;
-		case 5:{};break;
-		case 6:{};break;
 		case 7:{};break;
 		case 8:{};break;
 		case 9:{};break;
