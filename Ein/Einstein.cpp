@@ -1,7 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Einstein.h"
 
 #include<iostream>
 #include<string>
+#include<ctime>
+#include<fstream>
 #include<vector>
 using namespace std;
 
@@ -222,19 +225,21 @@ int Einstein::handle(){
 	//string tempget = clientsocket.getRecvMsg();
 	//cout << tempget;
 	
+	static int count = 1;
 	//get the message from sever
 	clientsocket.recvMsg();
 	string reciveCB = clientsocket.getRecvMsg();
-	cout << 1 << reciveCB << endl;
-	clientsocket.recvMsg();
-	string reciveCB = clientsocket.getRecvMsg();
-	cout << 2 << reciveCB << endl;
+	if(reciveCB == "RESULT : BLUEWIN" || reciveCB == "RESULT : REDWIN"){
+		logging(reciveCB);
+		return 0;
+	}
+	cout << count << reciveCB << endl;
 	parse(reciveCB);
 	chessMove = reciveCB[25];
 
-	chessColor toMove;
 	//set the color of the chessMove
-	toMove = setColor(chessMove);
+	chessColor toMove = setColor(chessMove);
+	
 
 	//set the bound of chessmove
 	int bound1 = 0, bound2 = 0;
@@ -387,7 +392,7 @@ int Einstein::handle(){
 					case 9: 
 					case 16:
 					case 8:{
-						switch(checkSafety(pos, red)){
+						switch(checkSafety(pos, blue)){
 							case 1: orderSend = to_string(chessMove) + "|left"; break;
 							case 2: orderSend = to_string(chessMove) + "|up"; break;
 							case 3: orderSend = to_string(chessMove) + "|leftup"; break;
@@ -405,18 +410,100 @@ int Einstein::handle(){
 			}
 		};break;
 		case 6:{
-			
+			if(toMove == red)
+				switch(checkSafety(pos, red)){
+							case 1: orderSend = to_string(chessMove) + "|right"; break;
+							case 2: orderSend = to_string(chessMove) + "|down"; break;
+							case 3: orderSend = to_string(chessMove) + "|rightdown"; break;
+							default :{
+								cout << "Something wrong with checkSafety.\n";
+								return 0;
+							}
+						}
+			else
+				switch(checkSafety(pos, blue)){
+							case 1: orderSend = to_string(chessMove) + "|left"; break;
+							case 2: orderSend = to_string(chessMove) + "|up"; break;
+							case 3: orderSend = to_string(chessMove) + "|leftup"; break;
+							default :{
+								cout << "Something wrong with checkSafety.\n";
+								return 0;
+							}
+						}
 		};break;
-		case 7:{};break;
-		case 8:{};break;
-		case 9:{};break;
+		case 7:{
+			if(toMove == red)
+				switch(pos){
+					case 14: orderSend = to_string(chessMove) + "|down"; break;
+					case 27: orderSend = to_string(chessMove) + "|right"; break;
+					case 13:
+					case 17: switch(checkSafety(pos, red)){
+							case 1: orderSend = to_string(chessMove) + "|right"; break;
+							case 2: orderSend = to_string(chessMove) + "|down"; break;
+							case 3: orderSend = to_string(chessMove) + "|rightdown"; break;
+							default :{
+								cout << "Something wrong with checkSafety.\n";
+								return 0;
+							}
+						}; break;
+					default :{
+						cout << "Something wrong with the pos.\n";
+						return 0;
+					}
+				}
+			else // tomove is blue
+				switch(checkSafety(pos, blue)){
+							case 1: orderSend = to_string(chessMove) + "|left"; break;
+							case 2: orderSend = to_string(chessMove) + "|up"; break;
+							case 3: orderSend = to_string(chessMove) + "|leftup"; break;
+							default :{
+								cout << "Something wrong with checkSafety.\n";
+								return 0;
+							}
+						}
+		};break;
+		case 8:{
+			if(toMove == red)
+				switch(pos){
+					case 19: orderSend = to_string(chessMove) + "|down"; break;
+					case 18: orderSend = to_string(chessMove) + "|rightdown"; break;
+					case 23: orderSend = to_string(chessMove) + "|right"; break;
+					default :{
+						cout << "Something wrong with pos.\n";
+						return 0;
+					}
+				}
+			else //tomove is blue
+				switch(checkSafety(pos, blue)){
+							case 1: orderSend = to_string(chessMove) + "|left"; break;
+							case 2: orderSend = to_string(chessMove) + "|up"; break;
+							case 3: orderSend = to_string(chessMove) + "|leftup"; break;
+							default :{
+								cout << "Something wrong with checkSafety.\n";
+								return 0;
+							}
+						}
+		};break;
+		case 9:{
+			switch(checkSafety(pos, blue)){
+							case 1: orderSend = to_string(chessMove) + "|left"; break;
+							case 2: orderSend = to_string(chessMove) + "|up"; break;
+							case 3: orderSend = to_string(chessMove) + "|leftup"; break;
+							default :{
+								cout << "Something wrong with checkSafety.\n";
+								return 0;
+							}
+						}
+		};break;
 		default:{
 			cout << "There is something wrong with the variable valuePos.\n";
 			return 0;
 		}
 	}
-	
 
+	cout << count++ << orderSend << endl;
+	//send the order to the sever
+	clientsocket.sendMsg(orderSend.data());
 
 	return 1;
 }
@@ -437,16 +524,26 @@ string getTime(){
 } 
 
 
+//the function to put the string of log into the ram vector
 int Einstein::logging(string s){
 	string temp;
 	//get time
 	temp += getTime();
-
-
+	temp = temp + "\t" + s;
+	
+	//put the temp into the vector
+	ramString.push_back(temp);
 	return 0;
 }
 
+
+//put the ram vector into the logfile
 int Einstein::writelog(){
-	
+	ofstream out;
+	out.open("TestServer.log", ios::out);
+	for(vector<string>:: iterator t = ramString.begin(); t != ramString.end(); t++)
+		out << *t << "\n";
+
+	out.close();
 	return 0;
 }

@@ -1030,6 +1030,6 @@ if __name__ == '__main__':
     filename = os.getcwd() + "\\data\\" + Red + 'Vs' + Blue
     print(filename)
     # 测试局数
-    cnt = 10
+    cnt = 2
     result = startGame(Red, Blue, cnt, filename, detail=True)
     input('wait')
