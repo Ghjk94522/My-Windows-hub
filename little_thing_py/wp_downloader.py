@@ -6,17 +6,20 @@ import time
 
 def getHTMLText(url) :
     try :
-        r = requests.get(url, timeout=30)
+        header = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
+        }
+        r = requests.get(url, headers=header, timeout=30)
         r.raise_for_status()
         r.encoding = r.apparent_encoding
         return r.text
     except :
+        print(r.status_code)
         return "Request Error!"
 
 def debug_data(html) :
     soup = BeautifulSoup(html, "html.parser")
-    #for link in soup.find_all("img"):
-    print(soup.find_all())
+    print(soup.prettify())
 
 def produce_HTML(html) :
     soup = BeautifulSoup(html, "html.parser")
